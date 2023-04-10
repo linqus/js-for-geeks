@@ -24,7 +24,7 @@
 
         handleRepLogDelete: function (e) {
             e.preventDefault();
-            $link = $(e.currentTarget);
+            var $link = $(e.currentTarget);
             $link.find('.fa')
                 .removeClass('fa-trash')
                 .addClass('fa-spinner')

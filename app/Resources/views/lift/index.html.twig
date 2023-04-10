@@ -21,12 +21,13 @@
                 </thead>
                 <tbody>
                 {% for repLog in repLogs %}
-                    <tr>
+                    <tr data-weight="{{ repLog.totalWeightLifted }}">
                         <td>{{ repLog.itemLabel|trans }}</td>
                         <td>{{ repLog.reps }}</td>
                         <td>{{ repLog.totalWeightLifted }}</td>
                         <td>
-                            <a href="#" class="js-delete-rep-log">
+                            <a href="#" class="js-delete-rep-log" 
+                               data-url="{{ path('rep_log_delete', {id:repLog.getId()}) }}">
                                 <span class="fa fa-trash"></span>
                                 <!-- Delete -->
                             </a>
@@ -42,7 +43,7 @@
                     <tr>
                         <td>&nbsp;</td>
                         <th>Total</th>
-                        <th>{{ totalWeight }}</th>
+                        <th class="js-total-weight">{{ totalWeight }}</th>
                         <td>&nbsp;</td>
                     </tr>
                 </tfoot>
@@ -79,14 +80,26 @@
                     .addClass('fa-spinner')
                     .addClass('fa-spin');
 
-                console.log(
-                    e.currentTarget===this,
-                );
-                //console.dir(e.target);
+                var deleteUrl = $(this).data('url');
+                var $row = $(this).closest('tr');
+                var $totalWeightContainer = $('.js-total-weight');
+                var rowWeightLifted = $row.data('weight');
+                var totalWeight = $totalWeightContainer.html();
+                console.log(totalWeight);
+
+                $.ajax({
+                    url: deleteUrl,
+                    method: 'DELETE',
+                    success: function() {
+                        $row.fadeOut();
+                        $totalWeightContainer.html(totalWeight - rowWeightLifted);
+
+                    }
+                });
             });
 
             $table.find('tbody tr').on('click', function() {
-                console.log('row clicked!');
+                console.log('row clicked!')
             });
 
         });

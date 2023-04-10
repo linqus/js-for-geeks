@@ -15,6 +15,10 @@
                 'click', 
                 this.handleRowClick.bind(this)
             );
+
+            console.log(this.helper, Object.keys(this.helper));
+            console.log(Helper, Object.keys(Helper));
+            console.log(this.helper.calculateTotalWeight());
         },
 
         updateTotalWeightLifted: function () {
@@ -57,7 +61,7 @@
             this.$wrapper = $wrapper;
     };
 
-    Helper.calculateTotalWeight = function() {
+    Helper.prototype.calculateTotalWeight = function() {
             var totalWeightLifted = 0;
             this.$wrapper.find('tbody tr').each(function() {
                 totalWeightLifted += $(this).data('weight');

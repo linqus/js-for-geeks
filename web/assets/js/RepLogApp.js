@@ -15,6 +15,11 @@
             this.handleRowClick.bind(this)
         );
 
+        this.$wrapper.find('.js-new-rep-log-form').on(
+            'submit',
+            this.handleNewFormSubmit.bind(this)
+        )
+
     };
 
     $.extend(window.RepLogApp.prototype, {
@@ -49,6 +54,18 @@
         handleRowClick: function() {
             console.log('row clicked!');
         },
+
+        handleNewFormSubmit: function(e) {
+
+            e.preventDefault();
+            var $form = $(e.currentTarget);
+
+            $.ajax({
+                url: $form.attr('action'),
+                method: 'POST',
+                data: $form.serialize()
+            })
+        }
     });
 
     var Helper = function($wrapper) {

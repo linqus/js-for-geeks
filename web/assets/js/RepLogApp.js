@@ -16,9 +16,6 @@
                 this.handleRowClick.bind(this)
             );
 
-            console.log(this.helper, Object.keys(this.helper));
-            console.log(Helper, Object.keys(Helper));
-            console.log(this.helper.calculateTotalWeight());
         },
 
         updateTotalWeightLifted: function () {

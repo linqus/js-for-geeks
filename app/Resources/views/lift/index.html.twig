@@ -28,6 +28,7 @@
                         <td>
                             <a href="#" class="js-delete-rep-log">
                                 <span class="fa fa-trash"></span>
+                                <!-- Delete -->
                             </a>
                         </td>
                     </tr>
@@ -73,13 +74,14 @@
 
             $table.find('.js-delete-rep-log').on('click', function (e) {
                 e.preventDefault();
-                $(e.target).addClass('text-danger');
+                $(this).find('.fa')
+                    .removeClass('fa-trash')
+                    .addClass('fa-spinner')
+                    .addClass('fa-spin');
+
                 console.log(
-                    e.target,
-                    $(e.target)[0] === e.target,
-                    $('.fa-trash')[2] === e.target,
+                    e.currentTarget===this,
                 );
-                e.target.className = e.target.className + ' text-color';
                 //console.dir(e.target);
             });
 

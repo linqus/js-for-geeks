@@ -53,18 +53,18 @@
 
     }
 
-    var Helper = {
-        initialize: function($wrapper) {
+    var Helper = {}
+    Helper.initialize = function($wrapper) {
             this.$wrapper = $wrapper;
-        },
+    };
 
-        calculateTotalWeight: function() {
+    Helper.calculateTotalWeight = function() {
             var totalWeightLifted = 0;
             this.$wrapper.find('tbody tr').each(function() {
                 totalWeightLifted += $(this).data('weight');
             });
 
             return totalWeightLifted;
-        }
-    }
-})(window, jQuery)
+    };
+    
+})(window, jQuery);

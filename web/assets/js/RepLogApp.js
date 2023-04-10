@@ -4,7 +4,7 @@
     window.RepLogApp = {
         initialize: function($wrapper) {
             this.$wrapper = $wrapper;
-            Helper.initialize($wrapper);
+            this.helper = new Helper($wrapper);
 
             this.$wrapper.find('.js-delete-rep-log').on(
                 'click',
@@ -19,7 +19,7 @@
 
         updateTotalWeightLifted: function () {
     
-            this.$wrapper.find('.js-total-weight').html(Helper.calculateTotalWeight());
+            this.$wrapper.find('.js-total-weight').html(this.helper.calculateTotalWeight());
         },
 
         handleRepLogDelete: function (e) {
@@ -53,8 +53,7 @@
 
     }
 
-    var Helper = {}
-    Helper.initialize = function($wrapper) {
+    var Helper = function($wrapper) {
             this.$wrapper = $wrapper;
     };
 

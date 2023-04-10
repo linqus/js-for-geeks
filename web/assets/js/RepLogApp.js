@@ -1,25 +1,24 @@
 (function(window, $) {
     'use strict';
 
-    window.RepLogApp = {
-        initialize: function($wrapper) {
-            this.$wrapper = $wrapper;
-            this.helper = new Helper($wrapper);
+    window.RepLogApp = function($wrapper) {
+        this.$wrapper = $wrapper;
+        this.helper = new Helper($wrapper);
 
-            this.$wrapper.find('.js-delete-rep-log').on(
-                'click',
-                this.handleRepLogDelete.bind(this)
-            );
+        this.$wrapper.find('.js-delete-rep-log').on(
+            'click',
+            this.handleRepLogDelete.bind(this)
+        );
 
-            this.$wrapper.find('tbody tr').on(
-                'click', 
-                this.handleRowClick.bind(this)
-            );
+        this.$wrapper.find('tbody tr').on(
+            'click', 
+            this.handleRowClick.bind(this)
+        );
 
-        },
+    };
 
+    $.extend(window.RepLogApp.prototype, {
         updateTotalWeightLifted: function () {
-    
             this.$wrapper.find('.js-total-weight').html(this.helper.calculateTotalWeight());
         },
 
@@ -50,21 +49,21 @@
         handleRowClick: function() {
             console.log('row clicked!');
         },
-
-
-    }
+    });
 
     var Helper = function($wrapper) {
             this.$wrapper = $wrapper;
     };
 
-    Helper.prototype.calculateTotalWeight = function() {
+    $.extend(Helper.prototype, {
+        calculateTotalWeight: function() {
             var totalWeightLifted = 0;
             this.$wrapper.find('tbody tr').each(function() {
                 totalWeightLifted += $(this).data('weight');
             });
 
             return totalWeightLifted;
-    };
+        }
+    });
     
 })(window, jQuery);

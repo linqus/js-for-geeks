@@ -62,18 +62,22 @@
 
             e.preventDefault();
             var $form = $(e.currentTarget);
-            var $tbody = this.$wrapper.find('tbody');
-            var self = this;
+            var formData = {};
+            $.each($form.serializeArray(), function(key,field){
+                formData[field.name] = field.value;
+            });
+            console.log(formData, $form.serialize());
             $.ajax({
-                url: $form.attr('action'),
+                url: $form.data('url'),
                 method: 'POST',
-                data: $form.serialize(),
+                data: JSON.stringify(formData),
                 success: function(dataresp) {
-                    $tbody.append(dataresp);
-                    self.updateTotalWeightLifted();
+                    // todo
+                    console.log('success');
                 },
                 error: function(jqXHR) {
-                    self.$wrapper.find('.js-form-wrapper').html(jqXHR.responseText);
+                    // todo
+                    console.log('error');
                 }
             })
         }
